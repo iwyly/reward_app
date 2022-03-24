@@ -7,4 +7,8 @@ defmodule RewardAppWeb.PageController do
   def admin(conn, _params) do
     render(conn, "admin.html")
   end
+
+  def welcome(conn, _params) do
+    render(conn, "index.html")
+  end
 end

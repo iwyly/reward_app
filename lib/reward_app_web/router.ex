@@ -2,6 +2,7 @@ defmodule RewardAppWeb.Router do
   use RewardAppWeb, :router
 
   import RewardAppWeb.UserAuth
+  alias RewardAppWeb.EnsureRolePlug
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -17,13 +18,31 @@ defmodule RewardAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :user do
+    plug EnsureRolePlug, [:admin, :user]
+  end
+
+  pipeline :admin do
+    plug EnsureRolePlug, :admin
+  end
+
   scope "/", RewardAppWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    get "/admin", PageController, :admin
+    get "/", PageController, :welcome
   end
 
+  scope "/", RewardAppWeb do
+    pipe_through [:browser, :user]
+
+    get "/member", PageController, :index
+  end
+
+  scope "/", RewardAppWeb do
+    pipe_through [:browser, :admin]
+
+    get "/admin", PageController, :admin
+  end
   # Other scopes may use custom stacks.
   # scope "/api", RewardAppWeb do
   #   pipe_through :api
