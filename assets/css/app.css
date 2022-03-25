@@ -1,5 +1,22 @@
 /* This file is for your main application CSS */
-@import "./phoenix.css";
+
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.section {
+  font-size: 22px;
+}
+.reward {
+  font-size: 20px;
+}
+a {
+  text-decoration: none;
+  color:black
+}
+a:hover {
+  color: black;
+}
+
+
 
 /* Alerts and form errors used by phx.new */
 .alert {
