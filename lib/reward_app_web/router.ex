@@ -30,18 +30,21 @@ defmodule RewardAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :welcome
+    get "/member", PageController, :member
+    post "/member/grant_points_to_member", PageController, :grant_points_to_member
+    get "/admin", PageController, :admin
   end
 
   scope "/", RewardAppWeb do
     pipe_through [:browser, :user]
 
-    get "/member", PageController, :index
+
   end
 
   scope "/", RewardAppWeb do
     pipe_through [:browser, :admin]
 
-    get "/admin", PageController, :admin
+
   end
   # Other scopes may use custom stacks.
   # scope "/api", RewardAppWeb do
