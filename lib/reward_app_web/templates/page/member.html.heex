@@ -1,13 +1,17 @@
 <section class="section row gx-5">
   <div id="grant-reward" class="col-6 p-4 offset-3">
-  <h4 class="px-1 py-3">Grant your member points:</h4>
-  <div class="input-group">
-    <select name="members" class="form-select p-1" id="inputGroupSelect04">
-        <option value="member">member u really like</option>
-    </select>
-    <input type="number"  class="form-control" name="reward" placeholder="Amount..." max="50" min="1"/>
-    <button class="btn btn-outline-secondary" type="button">give</button>
-  </div>
+    <h4 class="px-1 py-3">Grant your member points:</h4>
+    <%= form_for :grant_details, Routes.page_path(@conn, :grant_points_to_member), fn f -> %>
+    <div class="input-group">
+
+        <%= select f, :member, @members_emails, id: "inputGroupSelect04", class: "form-select p-1" %>
+
+        <%= number_input f, :amount, class: "form-control", max: 50, min: 1, placeholder: "Amount..." %>
+
+        <%= submit "give", class: "btn btn-outline-secondary" %>
+
+    </div>
+    <% end %>
   </div>
 
   <div id="given-rewards"  class="col-6 p-4 offset-3">
