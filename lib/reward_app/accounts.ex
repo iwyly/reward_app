@@ -14,6 +14,14 @@ defmodule RewardApp.Accounts do
     |> User.admin_registration_changeset(attrs)
     |> Repo.insert()
   end
+  def get_all_members() do
+    Repo.all(User)
+    |>Enum.filter(fn user -> user.role == :user end)
+  end
+
+  def get_users_given_reward(_user_id) do
+
+  end
   ## Database getters
 
   @doc """
