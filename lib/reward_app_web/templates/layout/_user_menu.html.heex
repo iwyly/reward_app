@@ -2,7 +2,9 @@
 <%= if @current_user do %>
   <button class="btn btn-outline-danger"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></button>
   <li><%= @current_user.email %></li>
-  <li>Your reward pool:<%= @current_user.reward_pool %></li>
+  <%= if @current_user.role == :user do %>
+    <li>Your reward pool:<%= @current_user.reward_pool %></li>
+  <% end %>
 <% else %>
   <button class="btn btn-outline-primary"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></button>
 <% end %>

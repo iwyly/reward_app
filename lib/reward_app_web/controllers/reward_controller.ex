@@ -15,7 +15,7 @@ defmodule RewardAppWeb.RewardController do
   end
 
   def create(conn, %{"reward" => reward_params}) do
-    case RewardManager.create_reward(reward_params) do
+    case RewardManager.create_reward_record(reward_params) do
       {:ok, reward} ->
         conn
         |> put_flash(:info, "Reward created successfully.")

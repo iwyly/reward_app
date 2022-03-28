@@ -37,9 +37,6 @@ defmodule RewardApp.Accounts do
   end
 
 
-  def get_users_given_reward(_user_id) do
-
-  end
   ## Database getters
 
   @doc """
