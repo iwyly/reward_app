@@ -51,7 +51,8 @@ defmodule RewardApp.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:ecto_enum, "~> 1.4"}
+      {:ecto_enum, "~> 1.4"},
+      {:quantum, "~> 3.4"}
     ]
   end
 

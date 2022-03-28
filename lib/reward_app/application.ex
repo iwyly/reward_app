@@ -15,9 +15,11 @@ defmodule RewardApp.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: RewardApp.PubSub},
       # Start the Endpoint (http/https)
-      RewardAppWeb.Endpoint
+      RewardAppWeb.Endpoint,
       # Start a worker by calling: RewardApp.Worker.start_link(arg)
       # {RewardApp.Worker, arg}
+      # Start Cron job
+      RewardApp.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
