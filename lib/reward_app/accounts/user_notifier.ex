@@ -8,7 +8,7 @@ defmodule RewardApp.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"MyApp", "contact@example.com"})
+      |> from({"Rewardapp", "no_reply_rewardapp@example.com"})
       |> subject(subject)
       |> text_body(body)
 
@@ -17,6 +17,18 @@ defmodule RewardApp.Accounts.UserNotifier do
     end
   end
 
+  def deliver_notify_member(%{"to" => to, "amount" => amount, "from" => from}) do
+    email =
+      new()
+      |> to(to)
+      |> from({"Rewardapp", "no_reply_rewardapp@example.com"})
+      |> subject("You just received reward")
+      |> text_body("Hey #{to}! #{from} has rewarded you with #{amount} points. ")
+
+    with {:ok, _metadata} <- Mailer.deliver(email) do
+      {:ok, email}
+    end
+  end
   @doc """
   Deliver instructions to confirm account.
   """

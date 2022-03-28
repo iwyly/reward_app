@@ -16,8 +16,26 @@ defmodule RewardApp.Accounts do
   end
   def get_all_members() do
     Repo.all(User)
-    |>Enum.filter(fn user -> user.role == :user end)
+    |> Enum.filter(fn user -> user.role == :user end)
   end
+
+  def grant_transfer(grant_details) do
+    from_user = get_user_by_email(grant_details["from"])
+    to_user = get_user_by_email(grant_details["to"])
+    {amount, _} = Integer.parse(grant_details["amount"])
+
+    from_user
+    |> update_user_reward_pool(%{reward_pool: from_user.reward_pool - amount})
+
+    to_user
+    |> update_user_reward_pool(%{reward_pool: to_user.reward_pool + amount})
+  end
+  def update_user_reward_pool(%User{} = user, attrs) do
+    user
+    |> User.user_reward_pool_changeset(attrs)
+    |> Repo.update()
+  end
+
 
   def get_users_given_reward(_user_id) do
 

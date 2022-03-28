@@ -4,9 +4,9 @@
     <%= form_for :grant_details, Routes.page_path(@conn, :grant_points_to_member), fn f -> %>
     <div class="input-group">
 
-        <%= select f, :member, @members_emails, id: "inputGroupSelect04", class: "form-select p-1" %>
+        <%= select f, :to, @members_emails, id: "inputGroupSelect04", class: "form-select p-1" %>
 
-        <%= number_input f, :amount, class: "form-control", max: 50, min: 1, placeholder: "Amount..." %>
+        <%= number_input f, :amount ,class: "form-control", max: 50, min: 1, required: :true,placeholder: "Amount..." %>
 
         <%= submit "give", class: "btn btn-outline-secondary" %>
 
@@ -16,16 +16,13 @@
 
   <div id="given-rewards"  class="col-6 p-4 offset-3">
   <h4 class="py-3">Recenlty given rewards:</h4>
+  <%= for granted_reward <- @recent_granted_rewards do %>
     <div class="reward  m-3 p-1 border border-secondary border-2">
-      <p class="who-got-reward"><b>Member:</b> jakis@typ.com</p>
-      <p class="how-much"><b>Given points:</b> 30</p>
-      <p class="when"><b>Date:</b> 4.20.1337</p>
+      <p class="who-got-reward"><b>Member:</b> <%= granted_reward.to %></p>
+      <p class="how-much"><b>Given points:</b> <%= granted_reward.amount %></p>
+      <p class="when"><b>Date:</b> <%= granted_reward.when |> NaiveDateTime.to_date() %></p>
     </div>
-    <div class="reward mx-3 p-1 border border-secondary border-2">
-      <p class="who-got-reward"><b>Member:</b> jakis@typiarz.com</p>
-      <p class="how-much"><b>Given points:</b> 40</p>
-      <p class="when"><b>Date:</b> 4.20.1337</p>
-    </div>
+    <% end %>
   </div>
 </section>
 

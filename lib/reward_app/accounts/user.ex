@@ -27,6 +27,11 @@ defmodule RewardApp.Accounts.User do
     changeset
     |> put_change(:role, :admin)
   end
+
+  def user_reward_pool_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:reward_pool])
+  end
   @doc """
   A user changeset for registration.
 

@@ -46,6 +46,12 @@ defmodule RewardAppWeb.Router do
 
 
   end
+
+  scope "/dev" do
+    pipe_through [:browser]
+    forward "/mailbox", Plug.Swoosh.MailboxPreview, base_path: "/dev/mailbox"
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", RewardAppWeb do
   #   pipe_through :api
@@ -76,7 +82,7 @@ defmodule RewardAppWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      #forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
 

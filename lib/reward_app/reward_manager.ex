@@ -21,6 +21,15 @@ defmodule RewardApp.RewardManager do
     Repo.all(Reward)
   end
 
+  def list_granted_rewards_by_user(user_email) do
+    Repo.all(from r in Reward, where: r.from == ^user_email, select: %{to: r.to, amount: r.amount,  when: r.inserted_at})
+  end
+
+  def recent_rewards(rewards_list, how_many) do
+    rewards_list
+    |> Enum.reverse()
+    |> Enum.take(how_many)
+  end
   @doc """
   Gets a single reward.
 
@@ -49,7 +58,7 @@ defmodule RewardApp.RewardManager do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_reward(attrs \\ %{}) do
+  def create_reward_record(attrs \\ %{}) do
     %Reward{}
     |> Reward.changeset(attrs)
     |> Repo.insert()
