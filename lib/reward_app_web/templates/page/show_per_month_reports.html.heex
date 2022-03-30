@@ -1,0 +1,25 @@
+<section class="section row gx-5">
+ <div class="col-9 p-4 offset-1">
+  <%= form_for :show_reports, Routes.page_path(@conn, :admin_show_per_month_reports),  fn f -> %>
+   <div class="input-group w-50 col-9 p-4 offset-3">
+
+     <h4 class="m-1">Select month:</h4>
+     <%= select f, :select_month, @months, id: "inputGroupSelect04 special-select", class: "form-select p-1 text-center" %>
+
+     <%= submit "show", class: "btn btn-outline-secondary" %>
+
+   </div>
+  <% end %>
+  <%= if @reports_for_month do %>
+    <div id="given-rewards"  class="col-6 p-4 offset-3">
+      <h4 class="py-3">Report for chosen month:</h4>
+      <%= for report <- @reports_for_month do %>
+        <div class="reward  m-3 p-1 border border-secondary border-2">
+          <p class="who-got-reward"><b>Member:</b> <%= report.member %></p>
+          <p class="how-much"><b>Points given to user this month:</b> <%= report.sum %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+ </div>
+</section>

@@ -68,4 +68,17 @@ defmodule RewardAppWeb.PageController do
 
     redirect(conn,to: Routes.page_path(conn, :admin_show_reward_pools))
   end
+
+  # admin per-month reports(summarizing rewards given to each user) page
+  def admin_show_per_month_reports(conn, %{"show_reports" => %{"select_month" => month}})  do
+    months = RewardManager.get_existing_months()
+    reports_for_month = RewardManager.get_monthly_report_for_users(month)
+    render(conn, "show_per_month_reports.html", months: months, reports_for_month: reports_for_month)
+  end
+
+  def admin_show_per_month_reports(conn, _params) do
+    months = RewardManager.get_existing_months()
+    render(conn, "show_per_month_reports.html", months: months, reports_for_month: false)
+  end
+
 end

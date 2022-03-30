@@ -35,6 +35,8 @@ defmodule RewardAppWeb.Router do
     get "/admin", PageController, :admin
     get "/admin/show_reward_pools", PageController, :admin_show_reward_pools
     post "/admin/edit_reward_pool", PageController, :admin_edit_reward_pool
+    get "/admin/show_per_month_reports", PageController, :admin_show_per_month_reports
+    post "/admin/show_per_month_reports", PageController, :admin_show_per_month_reports
   end
 
   scope "/", RewardAppWeb do

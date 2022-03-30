@@ -30,6 +30,19 @@ defmodule RewardApp.RewardManager do
     |> Enum.reverse()
     |> Enum.take(how_many)
   end
+
+  def get_existing_months do
+    Repo.all(from r in Reward, select: fragment("date_part('month', ?)", r.inserted_at), distinct: fragment("date_part('month', ?)", r.inserted_at))
+    |> Enum.map(fn month ->  trunc(month) end)
+  end
+
+  def get_monthly_report_for_users(month) do
+    {month, _} = Integer.parse(month)
+
+    Repo.all(from r in Reward, where:  fragment("date_part('month', ?)", r.inserted_at) == ^month, group_by: r.to , select: %{sum: sum(r.amount), member: r.to})
+  end
+
+
   @doc """
   Gets a single reward.
 
