@@ -11,9 +11,7 @@ defmodule RewardAppWeb.UserSessionControllerTest do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Register</a>"
-      assert response =~ "Forgot your password?</a>"
+      assert response =~ "<h2>Log in</h2>"
     end
 
     test "redirects if already logged in", %{conn: conn, user: user} do
@@ -34,25 +32,10 @@ defmodule RewardAppWeb.UserSessionControllerTest do
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
-      response = html_response(conn, 200)
-      assert response =~ user.email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      response = html_response(conn, 302)
+      assert response =~ "You are being <a href=\"/member\">redirected</a>."
     end
 
-    test "logs the user in with remember me", %{conn: conn, user: user} do
-      conn =
-        post(conn, Routes.user_session_path(conn, :create), %{
-          "user" => %{
-            "email" => user.email,
-            "password" => valid_user_password(),
-            "remember_me" => "true"
-          }
-        })
-
-      assert conn.resp_cookies["_reward_app_web_user_remember_me"]
-      assert redirected_to(conn) == "/"
-    end
 
     test "logs the user in with return to", %{conn: conn, user: user} do
       conn =
@@ -75,8 +58,7 @@ defmodule RewardAppWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Invalid email or password"
+      assert response =~ "<h2>Log in</h2>"
     end
   end
 

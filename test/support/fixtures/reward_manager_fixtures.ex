@@ -15,7 +15,7 @@ defmodule RewardApp.RewardManagerFixtures do
         from: "some from",
         to: "some to"
       })
-      |> RewardApp.RewardManager.create_reward()
+      |> RewardApp.RewardManager.create_reward_record()
 
     reward
   end

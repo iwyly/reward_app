@@ -20,17 +20,17 @@ defmodule RewardApp.RewardManagerTest do
       assert RewardManager.get_reward!(reward.id) == reward
     end
 
-    test "create_reward/1 with valid data creates a reward" do
+    test "create_reward_record/1 with valid data creates a reward" do
       valid_attrs = %{amount: 42, from: "some from", to: "some to"}
 
-      assert {:ok, %Reward{} = reward} = RewardManager.create_reward(valid_attrs)
+      assert {:ok, %Reward{} = reward} = RewardManager.create_reward_record(valid_attrs)
       assert reward.amount == 42
       assert reward.from == "some from"
       assert reward.to == "some to"
     end
 
-    test "create_reward/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = RewardManager.create_reward(@invalid_attrs)
+    test "create_reward_record/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = RewardManager.create_reward_record(@invalid_attrs)
     end
 
     test "update_reward/2 with valid data updates the reward" do
