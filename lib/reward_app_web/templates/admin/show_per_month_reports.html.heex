@@ -1,6 +1,6 @@
 <section class="section row gx-5">
  <div class="col-9 p-4 offset-1">
-  <%= form_for :show_reports, Routes.page_path(@conn, :admin_show_per_month_reports),  fn f -> %>
+  <%= form_for :show_reports, Routes.admin_path(@conn, :admin_show_per_month_reports),  fn f -> %>
    <div class="input-group w-50 col-9 p-4 offset-3">
 
      <h4 class="m-1">Select month:</h4>

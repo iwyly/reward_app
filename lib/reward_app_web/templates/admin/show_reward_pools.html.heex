@@ -1,7 +1,7 @@
 <section class="section row gx-5">
  <div class="col-9 p-4 offset-1">
    <%= for member_details <- @members_details do %>
-    <%= form_for :edit_details, Routes.page_path(@conn, :admin_edit_reward_pool), fn f -> %>
+    <%= form_for :edit_details, Routes.admin_path(@conn, :admin_edit_reward_pool), fn f -> %>
      <div class="d-flex align-items-center p-2 mb-5">
       <%= text_input f, :email ,class: "form-control-plaintext input-group-text",  required: :true, readonly: :true, value: member_details.email %>
 
