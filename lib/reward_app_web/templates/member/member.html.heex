@@ -1,7 +1,7 @@
 <section class="section row gx-5">
   <div id="grant-reward" class="col-6 p-4 offset-3">
     <h4 class="px-1 py-3">Grant your member points:</h4>
-    <%= form_for :grant_details, Routes.page_path(@conn, :grant_points_to_member), fn f -> %>
+    <%= form_for :grant_details, Routes.member_path(@conn, :grant_points_to_member), fn f -> %>
     <div class="input-group">
 
         <%= select f, :to, @members_emails, id: "inputGroupSelect04", class: "form-select p-1" %>

@@ -30,8 +30,8 @@ defmodule RewardAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :welcome
-    get "/member", PageController, :member
-    post "/member/grant_points_to_member", PageController, :grant_points_to_member
+    get "/member", MemberController, :member
+    post "/member/grant_points_to_member", MemberController, :grant_points_to_member
     get "/admin", PageController, :admin
     get "/admin/show_reward_pools", PageController, :admin_show_reward_pools
     post "/admin/edit_reward_pool", PageController, :admin_edit_reward_pool
