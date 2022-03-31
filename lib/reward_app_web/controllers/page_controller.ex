@@ -24,7 +24,7 @@ defmodule RewardAppWeb.PageController do
     current_user_email = conn.assigns.current_user.email
 
     members_emails = Accounts.get_all_members()
-                     |> Enum.map(fn member -> member.email end)
+                     |> Enum.map(&return_member_email(&1))
                      |> List.delete(current_user_email)
 
     recent_granted_rewards = RewardManager.list_granted_rewards_by_user(current_user_email)
@@ -35,6 +35,9 @@ defmodule RewardAppWeb.PageController do
     recent_granted_rewards: recent_granted_rewards
     )
   end
+
+  defp return_member_email(member), do: member.email
+
   # member grant points functionality
   def grant_points_to_member(conn, %{"grant_details" => grant_details}) do
     current_user_email = conn.assigns.current_user.email
@@ -53,13 +56,14 @@ defmodule RewardAppWeb.PageController do
   # admin show users' reward pools page
   def admin_show_reward_pools(conn, _params) do
     members_details = Accounts.get_all_members()
-                     |> Enum.map(fn member ->
-                        %{email: member.email, reward_pool: member.reward_pool}
-                      end)
+                     |> Enum.map(&return_member_reward_pool_map(&1))
 
     render(conn, "show_reward_pools.html", members_details: members_details)
   end
 
+  defp return_member_reward_pool_map(member) do
+    %{email: member.email, reward_pool: member.reward_pool}
+  end
   # admin edit user reward pool functionality
   def admin_edit_reward_pool(conn, %{"edit_details" => %{"email" => email, "new_amount" => new_amount}}) do
 

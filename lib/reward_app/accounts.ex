@@ -16,8 +16,10 @@ defmodule RewardApp.Accounts do
   end
   def get_all_members() do
     Repo.all(User)
-    |> Enum.filter(fn user -> user.role == :user end)
+    |> Enum.filter(&user_with_role?(&1, :user))
   end
+
+  defp user_with_role?(user, role), do: user.role == role
 
   def grant_transfer(grant_details) do
     from_user = get_user_by_email(grant_details["from"])

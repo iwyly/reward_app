@@ -33,8 +33,10 @@ defmodule RewardApp.RewardManager do
 
   def get_existing_months do
     Repo.all(from r in Reward, select: fragment("date_part('month', ?)", r.inserted_at), distinct: fragment("date_part('month', ?)", r.inserted_at))
-    |> Enum.map(fn month ->  trunc(month) end)
+    |> Enum.map(&to_integer(&1))
   end
+
+  defp to_integer(number), do: trunc(number)
 
   def get_monthly_report_for_users(month) do
     {month, _} = Integer.parse(month)
