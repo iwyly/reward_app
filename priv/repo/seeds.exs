@@ -15,3 +15,15 @@ RewardApp.Accounts.register_user(%{
   password: "123456789abc",
   password_confirmation: "123456789abc"
 })
+
+RewardApp.Accounts.register_user(%{
+  email: "ava@company.com",
+  password: "123456789abc",
+  password_confirmation: "123456789abc"
+})
+
+RewardApp.Accounts.register_user(%{
+  email: "emily@company.com",
+  password: "123456789abc",
+  password_confirmation: "123456789abc"
+})
