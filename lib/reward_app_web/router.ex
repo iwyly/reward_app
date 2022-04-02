@@ -30,8 +30,18 @@ defmodule RewardAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :welcome
+  end
+
+  scope "/", RewardAppWeb do
+    pipe_through [:browser, :user]
+
     get "/member", MemberController, :member
     post "/member/grant_points_to_member", MemberController, :grant_points_to_member
+  end
+
+  scope "/", RewardAppWeb do
+    pipe_through [:browser, :admin]
+
     get "/admin", AdminController, :admin
     get "/admin/show_reward_pools", AdminController, :admin_show_reward_pools
     post "/admin/edit_reward_pool", AdminController, :admin_edit_reward_pool
@@ -39,18 +49,6 @@ defmodule RewardAppWeb.Router do
     post "/admin/show_per_month_reports", AdminController, :admin_show_per_month_reports
     get "/admin/manage_reward_entries", AdminController, :manage_reward_entries
     get "/admin/delete_reward_entry", AdminController, :delete_reward_entry
-  end
-
-  scope "/", RewardAppWeb do
-    pipe_through [:browser, :user]
-
-
-  end
-
-  scope "/", RewardAppWeb do
-    pipe_through [:browser, :admin]
-
-
   end
 
   scope "/dev" do
