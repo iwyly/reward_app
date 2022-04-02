@@ -2,10 +2,11 @@
   <div class="col-6 p-4 offset-3">
 
     <h3>Welcome to admin panel page</h3>
-    <p class="my-3">To edit user reward pool click here <a href={Routes.admin_path(@conn, :admin_show_reward_pools)}><button class="btn btn-outline-primary">go to page</button></a></p>
+    <p class="my-3">edit user reward pool:<a href={Routes.admin_path(@conn, :admin_show_reward_pools)}><button class="btn btn-outline-primary">go to page</button></a></p>
 
-    <p class="my-3">To see per-month report about users reward pool click here<a href={Routes.admin_path(@conn, :admin_show_per_month_reports)}><button class="btn btn-outline-primary">go to page</button></a></p>
+    <p class="my-3">per-month report about users reward pool:<a href={Routes.admin_path(@conn, :admin_show_per_month_reports)}><button class="btn btn-outline-primary">go to page</button></a></p>
 
+    <p class="my-3">manage reward entries:<a href={Routes.admin_path(@conn, :manage_reward_entries)}><button class="btn btn-outline-primary">go to page</button></a></p>
   </div>
 </section>
 
