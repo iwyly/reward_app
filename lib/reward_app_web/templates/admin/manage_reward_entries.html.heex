@@ -1,0 +1,18 @@
+<section class="section row gx-5">
+ <div class="col-9 p-4 offset-1">
+
+  <h3 class="py-3">Rewards list :</h3>
+  <%= for reward <- @rewards_list do %>
+    <div class="reward  m-3 p-1 border border-secondary border-2 d-flex flex-column">
+      <p class="who-gave-reward"><b>From:</b> <%= reward.from %></p>
+      <p class="who-got-reward"><b>To:</b> <%= reward.to %></p>
+      <p class="how-much"><b>Given amount:</b> <%= reward.amount %></p>
+      <p class="when"><b>Date:</b> <%= reward.inserted_at |> NaiveDateTime.to_date() %></p>
+      <div class="mr-auto text-center">
+        <a href={Routes.admin_path(@conn, :delete_reward_entry, reward_record_id: reward.id)}><button class="btn btn-danger">Delete</button></a>
+      </div>
+    </div>
+  <% end %>
+
+ </div>
+</section>

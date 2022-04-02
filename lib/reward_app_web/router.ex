@@ -37,6 +37,8 @@ defmodule RewardAppWeb.Router do
     post "/admin/edit_reward_pool", AdminController, :admin_edit_reward_pool
     get "/admin/show_per_month_reports", AdminController, :admin_show_per_month_reports
     post "/admin/show_per_month_reports", AdminController, :admin_show_per_month_reports
+    get "/admin/manage_reward_entries", AdminController, :manage_reward_entries
+    get "/admin/delete_reward_entry", AdminController, :delete_reward_entry
   end
 
   scope "/", RewardAppWeb do

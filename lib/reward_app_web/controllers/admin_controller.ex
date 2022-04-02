@@ -39,4 +39,17 @@ defmodule RewardAppWeb.AdminController do
     render(conn, "show_per_month_reports.html", months: months, reports_for_month: false)
   end
 
+  def manage_reward_entries(conn, _params) do
+    rewards_list = RewardManager.list_rewards()
+
+    render(conn, "manage_reward_entries.html", rewards_list: rewards_list)
+  end
+
+  def delete_reward_entry(conn, %{"reward_record_id" => id}) do
+    RewardManager.get_reward!(id)
+    |> RewardManager.delete_reward()
+
+    redirect(conn,to: Routes.admin_path(conn, :manage_reward_entries))
+  end
+
 end
